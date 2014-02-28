@@ -254,8 +254,11 @@ this.setCanvasDimension(viewDimension);
      *
      */
     protoScene: function(rootNode) {
-    
+
     var viewDim = cgsgGetRealViewportDimension();
+
+    if(viewDim.width<1333 || viewDim.height < 600)
+    rootNode.scaleTo(viewDim.width/1333.0,viewDim.height/600.0);
 
     var sG = this.sceneGraph;
 
@@ -276,8 +279,8 @@ this.setCanvasDimension(viewDimension);
         // animate(note,attribute,duration,from,to,"linear",delay,precompute)
         //sG.animate(square, "position.x", 60,event.position[0].x,20,"linear",3,true);
         //sG.animate(square, "position.y", 60,event.position[0].y,20,"linear",3,true);
-        sG.animate(event.node, "position.x", 35,event.node.position.x,event.node.shouldPos.x,"linear",3,true);
-        sG.animate(event.node, "position.y", 35,event.node.position.y,event.node.shouldPos.y,"linear",3,true);
+        sG.animate(event.node, "position.x", 20,event.node.position.x,event.node.shouldPos.x,"linear",3,true);
+        sG.animate(event.node, "position.y", 20,event.node.position.y,event.node.shouldPos.y,"linear",3,true);
     };
 
     for(i=0;i < 5; i++)

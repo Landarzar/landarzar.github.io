@@ -7,9 +7,11 @@
           content="width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1, user-scalable = no"/>
  
     <!-- the framework -->
-    <script type="text/javascript" src="js/cgscenegraph_1.3.2.min.js"></script>
+    <script type="text/javascript" src="js/cgscenegraph_1.4.2.min.js"></script>
     <!-- your main class -->
-    <script type="text/javascript" src="mainApp.js"></script>
+    <script type="text/javascript" src="gamejs/prototype/App.js"></script>
+    <script type="text/javascript" src="gamejs/prototype/GameCard.js"></script>
+    <script type="text/javascript" src="gamejs/prototype/PlayerNode.js"></script>
  
 </head>
     <style type="text/css">
@@ -22,14 +24,14 @@ html {
 <body>
  
 <!-- Define the canvas -->
-<canvas id="sceneCanvas" width="1200" height="1200">
+<canvas id="sceneCanvas" width="1200" height="1200" style="background-color: gray;">
     Your browser does not support the canvas element.
 </canvas>
  
 <!-- Instanciate your main class, which inherit from CGSGScene -->
 <script type="text/javascript">
     var canvasScene = document.getElementById("sceneCanvas");
-    var game = new App(canvasScene);
+    var game = new PrototypeApp(canvasScene);
 </script>
 </body>
 </html>

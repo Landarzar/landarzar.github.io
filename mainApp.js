@@ -73,7 +73,7 @@ var CardNode = CGSGNode.extend(
     {
         //constructor.
         // You can specify any parameters you need
-        initialize:function (x, y) {
+        initialize:function (x, y, color="dodgerblue") {
 
             //call the constructor of the parent class.
             // CGSGNode take 4 parameters : x, y, width, height
@@ -94,6 +94,7 @@ var CardNode = CGSGNode.extend(
  
             //define here every property you need
             this.color = "#ff0000";
+            this.color = color;
 
             var height = this.dimension.height;
             var width  = this.dimension.width;
@@ -141,7 +142,7 @@ var CardNode = CGSGNode.extend(
  
             //draw this zone by using the custom property : this.color
             context.fillStyle = this.color;
-            context.fillStyle = "lightblue";
+            context.fillStyle = "white";
  
             //we draw the rect at (0,0) because we have already translated the context
             // to the correct position
@@ -161,6 +162,8 @@ var CardNode = CGSGNode.extend(
             context.arcTo(width,0,width-30,0,15);
             context.closePath();
             context.stroke();
+            context.fill();
+            context.fillStyle = this.color;
  
             context.lineWidth = 2;
             context.beginPath();
@@ -257,8 +260,15 @@ this.setCanvasDimension(viewDimension);
 
     var viewDim = cgsgGetRealViewportDimension();
 
-    if(viewDim.width<1333 || viewDim.height < 600)
-    rootNode.scaleTo(viewDim.width/1333.0,viewDim.height/600.0);
+    if(viewDim.width<1333 || viewDim.height < 800)
+    {
+        nwidth  = viewDim.width/1333.0;
+        nheight = viewDim.height/800.0;
+        if(nwidth < nheigt)
+            rootNode.scaleTo(nwidth,nwidth);
+        else
+            rootNode.scaleTo(nheight,nheight);
+    }
 
     var sG = this.sceneGraph;
 
@@ -283,16 +293,17 @@ this.setCanvasDimension(viewDimension);
         sG.animate(event.node, "position.y", 20,event.node.position.y,event.node.shouldPos.y,"linear",3,true);
     };
 
+    colors = new Array("dodgerblue","yellowgreen","white","gold","firebrick");
+
     for(i=0;i < 5; i++)
     {
-    var card = new CardNode(viewDim.width/2-(2.5*150)+i*150,viewDim.height-240);
-    card.scaleTo(0.25,0.25);
-    card.onDragEnd=dragFunc;
+        var card = new CardNode(viewDim.width/2-(2.5*150)+i*150,viewDim.height-240, colors[i]);
+        card.scaleTo(0.25,0.25);
+        card.onDragEnd=dragFunc;
  
-    //add your square as child of the root node
-    rootNode.addChild(card);}
-
+        //add your square as child of the root node
+        rootNode.addChild(card);
     }
- 
+    }
     }
 );
